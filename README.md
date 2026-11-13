@@ -33,17 +33,9 @@ Un jeu de démineur complet en Java, avec interface graphique JavaFX, écran d'a
 ## Prérequis
 
 - JDK 17 ou plus récent
-- Maven (intégré à IntelliJ IDEA)
-- Aucune installation manuelle de JavaFX : Maven le télécharge automatiquement
+- JavaFX
 
 ## Installation et lancement
-
-### Avec IntelliJ IDEA
-
-1. Récupère le projet : **File → New → Project from Version Control**, puis colle l'URL du dépôt GitHub.
-2. Laisse IntelliJ importer le projet Maven et attends la fin du chargement (si besoin, clique sur **Load Maven Changes**).
-3. Vérifie que le SDK du projet est un JDK 17 ou plus : **File → Project Structure → Project**.
-4. Ouvre `DemineurApp` et clique sur le triangle vert à côté de la méthode `main`.
 
 ### En ligne de commande
 
@@ -74,13 +66,6 @@ src/main/java/<package>/
 - **Placement différé des mines** : elles sont tirées au hasard au premier clic, ce qui garantit qu'on ne perd jamais dès le premier coup.
 - **`enum Niveau`** : chaque niveau porte ses dimensions et son nombre de mines, et le menu se construit automatiquement à partir de `Niveau.values()`.
 - **Sauvegarde des records** : `java.util.Properties`, dans le fichier `meilleurs_temps.properties`, situé dans le dossier `.demineur` du répertoire personnel de l'utilisateur. Supprimer ce fichier remet tous les records à zéro.
-
-## Pistes d'amélioration
-
-- [ ] Sortir les styles dans un fichier CSS
-- [ ] Niveau personnalisé (lignes, colonnes et mines au choix)
-- [ ] Révélation des voisines en cliquant sur un chiffre (*chording*)
-- [ ] Propagation itérative avec une `Deque` pour éviter tout risque de `StackOverflowError`
 
 ## Auteur
 
