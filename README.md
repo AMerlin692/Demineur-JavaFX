@@ -1,74 +1,162 @@
 # 💣 Démineur JavaFX
 
-Un jeu de démineur complet en Java, avec interface graphique JavaFX, écran d'accueil, écran de fin et sauvegarde des meilleurs temps.
+Un jeu de **Démineur développé en Java avec JavaFX**, proposant une interface graphique interactive ainsi qu'une version jouable en console.
 
-<!-- Ajoute ici une capture d'écran : ![Aperçu du jeu](docs/apercu.png) -->
+Le projet reprend les règles classiques du Démineur et propose trois niveaux de difficulté, un système de chronométrage et une sauvegarde des meilleurs temps.
 
-## Fonctionnalités
+## 📸 Aperçu du projet
 
-- Trois niveaux de difficulté (voir le tableau ci-dessous)
-- Premier clic toujours sûr : les mines sont placées après le premier clic, en épargnant la case choisie et ses voisines
-- Propagation automatique des zones vides
-- Drapeaux, compteur de mines restantes et chronomètre
-- Écran d'accueil pour choisir le niveau, écran de fin avec le résultat, le temps et le record
-- Meilleur temps par niveau, conservé d'une session à l'autre
-- Version console jouable au clavier
+### Menu principal
 
-## Niveaux
+![Menu principal](doc/MenuPrincipal.png)
 
-| Niveau        | Grille   | Mines |
-|---------------|----------|-------|
-| Débutant      | 9 × 9    | 10    |
-| Intermédiaire | 16 × 16  | 40    |
-| Expert        | 16 × 30  | 99    |
+### Parties en cours
 
-## Commandes
+Le jeu propose trois niveaux de difficulté, chacun disposant d'une grille adaptée.
 
-| Action           | Interface graphique | Version console        |
-|------------------|---------------------|------------------------|
-| Révéler une case | Clic gauche         | `r ligne colonne`      |
-| Poser un drapeau | Clic droit          | `f ligne colonne`      |
-| Quitter          | Bouton « Menu »     | `q`                    |
+|                  Débutant                  |                    Intermédiaire                     |                 Expert                 |
+|:------------------------------------------:|:----------------------------------------------------:|:--------------------------------------:|
+| ![Partie débutant](doc/PartieDebutant.png) | ![Partie intermédiaire](doc/PartieIntermediaire.png) | ![Partie expert](doc/PartieExpert.png) |
 
-## Prérequis
+### Fin de partie
 
-- JDK 17 ou plus récent
-- JavaFX
+L'application dispose d'un écran de fin permettant de visualiser le résultat de la partie.
 
-## Installation et lancement
+|                  Victoire                   |                  Défaite                  |
+|:-------------------------------------------:|:-----------------------------------------:|
+| ![Écran de victoire](doc/EcranVictoire.png) | ![Écran de défaite](doc/EcranDefaite.png) |
 
-### En ligne de commande
+## ✨ Fonctionnalités
+
+- **Trois niveaux de difficulté** : débutant, intermédiaire et expert.
+- **Premier clic sécurisé** : les mines sont placées après le premier clic, en protégeant la case sélectionnée et ses voisines.
+- **Propagation automatique** : révélation des zones vides et des cases adjacentes.
+- **Système de drapeaux** : possibilité de signaler les emplacements suspects.
+- **Chronomètre et compteur** : suivi du temps de jeu et du nombre de mines restantes.
+- **Gestion des parties** : écran d'accueil, sélection de la difficulté et écran de fin de partie.
+- **Sauvegarde des records** : conservation des meilleurs temps pour chaque niveau, même après fermeture du jeu.
+- **Version console** : possibilité de jouer directement depuis un terminal à l'aide de commandes clavier.
+
+## 🎮 Niveaux de difficulté
+
+| Niveau        | Dimensions de la grille | Nombre de mines |
+|:--------------|:-----------------------:|:---------------:|
+| Débutant      |          9 × 9          |       10        |
+| Intermédiaire |         16 × 16         |       40        |
+| Expert        |         16 × 30         |       99        |
+
+## 🕹️ Commandes
+
+| Action            | Interface graphique |  Version console  |
+|:------------------|:-------------------:|:-----------------:|
+| Révéler une case  |     Clic gauche     | `r ligne colonne` |
+| Poser un drapeau  |     Clic droit      | `f ligne colonne` |
+| Quitter la partie |   Bouton « Menu »   |        `q`        |
+
+## 🛠️ Technologies utilisées
+
+- **Java 17** : développement de la logique du jeu et programmation orientée objet.
+- **JavaFX** : création de l'interface graphique et gestion des interactions utilisateur.
+- **Maven** : gestion des dépendances et automatisation de la compilation.
+- **Git / GitHub** : gestion du versionnement et hébergement du code source.
+
+## ⚙️ Installation et lancement
+
+### Prérequis
+
+- JDK 17 ou supérieur.
+- Maven (ou utilisation du Maven Wrapper fourni avec le projet).
+
+### Récupération du projet
 
 ```bash
-git clone https://github.com/Manof692/Demineur-JavaFX
+git clone https://github.com/Manof692/Demineur-JavaFX.git
 cd Demineur-JavaFX
-chmod +x start.sh
-./start.sh
 ```
 
-## Structure du projet
+### Lancement
 
-```
-src/main/java/<package>/
-├── Case.java          # Une case : mine, révélée, drapeau, mines voisines
-├── Plateau.java       # La grille et les règles du jeu (aucune dépendance à l'affichage)
-├── Niveau.java        # Enum des niveaux de difficulté
-├── MeilleursTemps.java# Lecture et écriture des records dans un fichier
-├── DemineurApp.java   # Interface JavaFX : accueil, jeu, fin de partie
-├── Partie.java        # Boucle de jeu de la version console
-└── Main.java          # Point d'entrée de la version console
+Sous Windows :
+
+```bash
+mvnw.cmd javafx:run
 ```
 
-## Choix techniques
+Sous Linux ou macOS :
 
-- **Modèle séparé de l'affichage** : `Plateau` et `Case` ne connaissent ni la console ni JavaFX. Les deux interfaces réutilisent exactement la même logique.
-- **Propagation récursive** : révéler une case sans mine voisine révèle automatiquement ses huit voisines, de proche en proche.
-- **Placement différé des mines** : elles sont tirées au hasard au premier clic, ce qui garantit qu'on ne perd jamais dès le premier coup.
-- **`enum Niveau`** : chaque niveau porte ses dimensions et son nombre de mines, et le menu se construit automatiquement à partir de `Niveau.values()`.
-- **Sauvegarde des records** : `java.util.Properties`, dans le fichier `meilleurs_temps.properties`, situé dans le dossier `.demineur` du répertoire personnel de l'utilisateur. Supprimer ce fichier remet tous les records à zéro.
+```bash
+chmod +x mvnw
+./mvnw javafx:run
+```
 
-## Auteur
+Le projet peut également être lancé depuis un IDE compatible avec Maven et JavaFX.
 
-Projet personnel réalisé pour m'entraîner à la programmation orientée objet en Java.
+## 🏗️ Architecture du projet
 
-**Alan MERLIN**
+Le projet suit une organisation séparant la logique métier des différentes interfaces utilisateur.
+
+```text
+src/
+└── main/
+    ├── java/
+    │   └── fr/AMerlin692/Demineur/
+    │       ├── Case.java
+    │       ├── Plateau.java
+    │       ├── Niveau.java
+    │       ├── MeilleursTemps.java
+    │       ├── DemineurApp.java
+    │       ├── HelloController.java
+    │       └── Launcher.java
+    └── resources/
+
+doc/
+├── EcranDefaite.png
+├── EcranVictoire.png
+├── MenuPrincipal.png
+├── PartieDebutant.png
+├── PartieExpert.png
+└── PartieIntermediaire.png
+```
+
+### Principales responsabilités
+
+| Classe            | Responsabilité                                                              |
+|:------------------|:----------------------------------------------------------------------------|
+| `Case`            | Gestion de l'état d'une case : mine, révélation, drapeau et mines voisines. |
+| `Plateau`         | Gestion de la grille et application des règles du jeu.                      |
+| `Niveau`          | Définition des niveaux de difficulté et de leurs paramètres.                |
+| `MeilleursTemps`  | Lecture et sauvegarde des records.                                          |
+| `DemineurApp`     | Gestion de l'application et de l'interface JavaFX.                          |
+| `Launcher`        | Point d'entrée de l'application.                                            |
+
+## 💡 Choix techniques
+
+### Séparation de la logique métier et de l'affichage
+
+Les classes `Plateau` et `Case` sont indépendantes des interfaces graphiques et de la console. Les différentes interfaces peuvent ainsi exploiter une même logique métier, ce qui facilite la maintenance et l'évolution du projet.
+
+### Placement différé des mines
+
+Le placement des mines est effectué après le premier clic du joueur. La case sélectionnée ainsi que ses huit voisines sont protégées, garantissant un début de partie sans risque immédiat.
+
+### Propagation des zones vides
+
+Lorsqu'une case ne possède aucune mine dans son voisinage, ses cases adjacentes sont automatiquement révélées. Ce mécanisme repose sur une propagation récursive.
+
+### Gestion des niveaux avec une énumération
+
+L'énumération `Niveau` centralise les paramètres des différents niveaux de difficulté, notamment les dimensions de la grille et le nombre de mines. Cela permet d'éviter de disperser ces valeurs dans le code.
+
+### Sauvegarde persistante des records
+
+Les meilleurs temps sont enregistrés avec `java.util.Properties`, dans le fichier `meilleurs_temps.properties`, situé dans le dossier `.demineur` du répertoire personnel de l'utilisateur.
+
+La suppression de ce fichier réinitialise les records.
+
+## 👨‍💻 Auteur
+
+**Alan Merlin**
+
+Projet personnel réalisé dans le cadre de mon apprentissage du développement informatique, avec pour objectif de mettre en pratique la programmation orientée objet en Java et la création d'interfaces graphiques avec JavaFX.
+
+[Voir le dépôt GitHub](https://github.com/Manof692/Demineur-JavaFX)
