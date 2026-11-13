@@ -1,4 +1,4 @@
-package com.example.demo1;
+package fr.AMerlin692.Demineur;
 
 import javafx.application.Application;
 

@@ -1,8 +1,7 @@
-module com.example.demo1 {
+module fr.AMerlin692.Demineur {
     requires javafx.controls;
     requires javafx.fxml;
 
-
-    opens com.example.demo1 to javafx.fxml;
-    exports com.example.demo1;
+    opens fr.AMerlin692.Demineur to javafx.fxml;
+    exports fr.AMerlin692.Demineur;
 }
